@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, ChangeEvent } from 'react';
 import './App.css';
 import Person from './Person/Person'
+import { InputType } from 'zlib';
 
 class App extends Component {
   state: {
@@ -24,6 +25,16 @@ class App extends Component {
     ]})
   }
 
+  nameChangedHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    this.setState({
+      persons: [
+        { name: 'Max', age: 28 },
+        { name: event.target.value, age: 29 },
+        { name: 'Stepahnie', age: 26 }
+      ]
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -36,7 +47,8 @@ class App extends Component {
         <Person
         name={this.state.persons[1].name}
         age={this.state.persons[1].age}
-        click={this.switchNameHandler.bind(this, 'Max')} >My Hobbies: Racing</Person>
+        click={this.switchNameHandler.bind(this, 'Max')}
+        changed={this.nameChangedHandler} >My Hobbies: Racing</Person>
         <Person
         name={this.state.persons[2].name}
         age={this.state.persons[2].age} />
