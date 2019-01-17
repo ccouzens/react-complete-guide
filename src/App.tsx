@@ -1,12 +1,13 @@
 import React, { Component, ChangeEvent } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import { InputType } from 'zlib';
+
+type IdType = string;
 
 class App extends Component {
   state: {
     persons: {
-      id: string;
+      id: IdType;
       name: string;
       age: number;
     }[];
@@ -20,13 +21,19 @@ class App extends Component {
     showPersons: false
   };
 
-  nameChangedHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  nameChangedHandler = (id: IdType, event: ChangeEvent<HTMLInputElement>) => {
+    const personIndex = this.state.persons.findIndex(p => p.id === id);
+
+    const person = {
+      ...this.state.persons[personIndex],
+      name: event.target.value
+    };
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
     this.setState({
-      persons: [
-        { name: 'Max', age: 28 },
-        { name: event.target.value, age: 29 },
-        { name: 'Stepahnie', age: 26 }
-      ]
+      persons: persons
     });
   };
 
@@ -61,6 +68,7 @@ class App extends Component {
               name={person.name}
               age={person.age}
               key={person.id}
+              changed={this.nameChangedHandler.bind(this, person.id)}
             />
           ))}
         </div>
