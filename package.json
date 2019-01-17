@@ -26,6 +26,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/react": "^16.7.20",
     "prettier": "^1.15.3"
   }
 }
