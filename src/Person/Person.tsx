@@ -1,6 +1,6 @@
 import React, { ReactNode, ChangeEvent } from 'react';
 
-import './Person.css';
+import classes from './Person.module.css';
 
 const person = (props: {
   name: string;
@@ -10,7 +10,7 @@ const person = (props: {
   changed?: (event: ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
-    <div className="Person">
+    <div className={classes.Person}>
       <p onClick={props.click}>
         I'm {props.name} and I am {props.age} years old!
       </p>
