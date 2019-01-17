@@ -6,15 +6,16 @@ import { InputType } from 'zlib';
 class App extends Component {
   state: {
     persons: {
+      id: string;
       name: string;
       age: number;
     }[];
     showPersons: boolean;
   } = {
     persons: [
-      { name: 'Max', age: 28 },
-      { name: 'Manu', age: 29 },
-      { name: 'Stepahnie', age: 26 }
+      { id: 'asdf', name: 'Max', age: 28 },
+      { id: 'qwer', name: 'Manu', age: 29 },
+      { id: 'zxcv', name: 'Stepahnie', age: 26 }
     ],
     showPersons: false
   };
@@ -59,6 +60,7 @@ class App extends Component {
               click={this.deletePersonHandler.bind(this, index)}
               name={person.name}
               age={person.age}
+              key={person.id}
             />
           ))}
         </div>
