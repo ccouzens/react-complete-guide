@@ -6,8 +6,8 @@ const person = (props: {
   name: string;
   age: number;
   children?: ReactNode;
-  click?: () => void;
-  changed?: (event: ChangeEvent<HTMLInputElement>) => void;
+  click: () => void;
+  changed: (event: ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
     <div className={classes.Person}>
