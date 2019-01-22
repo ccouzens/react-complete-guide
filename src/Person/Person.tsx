@@ -9,6 +9,10 @@ const person = (props: {
   click: () => void;
   changed: (event: ChangeEvent<HTMLInputElement>) => void;
 }) => {
+  if (Math.random() > 0.7) {
+    throw new Error('Something went wrong');
+  }
+
   return (
     <div className={classes.Person}>
       <p onClick={props.click}>
