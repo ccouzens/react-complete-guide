@@ -1,6 +1,6 @@
 import React, { Component, ChangeEvent } from 'react';
 import classes from './App.module.css';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 
 type IdType = string;
 
