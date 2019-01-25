@@ -3,6 +3,7 @@ import classes from './Cockpit.module.css';
 import { PersonType } from '../Persons/Person/Person.d';
 
 const cockpit = (props: {
+  appTitle: string;
   showPersons: boolean;
   persons: PersonType[];
   clicked: () => void;
@@ -22,7 +23,7 @@ const cockpit = (props: {
 
   return (
     <div className={classes.Cockpit}>
-      <h1>Hi, I'm a React App</h1>
+      <h1>{props.appTitle}</h1>
       <p className={assignedClasses.join(' ')}>This is really working!</p>
       <button className={btnClass} onClick={props.clicked}>
         Toggle Persons

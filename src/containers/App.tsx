@@ -4,7 +4,11 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import { PersonType, IdType } from '../components/Persons/Person/Person.d';
 
-class App extends Component {
+type Props = {
+  title: string;
+};
+
+class App extends Component<Props> {
   state: {
     persons: PersonType[];
     showPersons: boolean;
@@ -60,6 +64,7 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <Cockpit
+          appTitle={this.props.title}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}
