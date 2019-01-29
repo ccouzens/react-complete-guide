@@ -1,23 +1,29 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, Component } from 'react';
 import Person from './Person/Person';
 import { PersonType, IdType } from './Person/Person.d';
 
-const persons = (props: {
+type Props = {
   persons: PersonType[];
   clicked: (index: number) => void;
   changed: (id: IdType, event: ChangeEvent<HTMLInputElement>) => void;
-}) => (
-  <>
-    {props.persons.map((person, index) => (
-      <Person
-        click={() => props.clicked(index)}
-        name={person.name}
-        age={person.age}
-        changed={event => props.changed(person.id, event)}
-        key={person.id}
-      />
-    ))}
-  </>
-);
+};
 
-export default persons;
+class Persons extends Component<Props> {
+  render() {
+    return (
+      <>
+        {this.props.persons.map((person, index) => (
+          <Person
+            click={() => this.props.clicked(index)}
+            name={person.name}
+            age={person.age}
+            changed={event => this.props.changed(person.id, event)}
+            key={person.id}
+          />
+        ))}
+      </>
+    );
+  }
+}
+
+export default Persons;
