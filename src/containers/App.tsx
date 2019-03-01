@@ -3,6 +3,7 @@ import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import { PersonType, IdType } from '../components/Persons/Person/Person.d';
+import AuthContext from '../context/auth-context';
 
 type Props = {
   title: string;
@@ -12,13 +13,17 @@ class App extends Component<Props> {
   state: {
     persons: PersonType[];
     showPersons: boolean;
+    showCockpit: boolean;
+    authenticated: boolean;
   } = {
     persons: [
       { id: 'asdf', name: 'Max', age: 28 },
       { id: 'qwer', name: 'Manu', age: 29 },
       { id: 'zxcv', name: 'Stepahnie', age: 26 }
     ],
-    showPersons: false
+    showPersons: false,
+    showCockpit: true,
+    authenticated: false
   };
 
   nameChangedHandler = (id: IdType, event: ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +53,10 @@ class App extends Component<Props> {
     this.setState({ showPersons: !doesShow });
   };
 
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+  };
+
   render() {
     let persons = null;
 
@@ -63,13 +72,29 @@ class App extends Component<Props> {
 
     return (
       <div className={classes.App}>
-        <Cockpit
-          appTitle={this.props.title}
-          showPersons={this.state.showPersons}
-          persons={this.state.persons}
-          clicked={this.togglePersonsHandler}
-        />
-        {persons}
+        <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}
+        >
+          Remove Cockpit
+        </button>
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+            login: this.loginHandler
+          }}
+        >
+          {this.state.showCockpit ? (
+            <Cockpit
+              appTitle={this.props.title}
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              clicked={this.togglePersonsHandler}
+            />
+          ) : null}
+          {persons}
+        </AuthContext.Provider>
       </div>
     );
   }

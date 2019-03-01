@@ -1,4 +1,5 @@
 import React, { ReactNode, ChangeEvent } from 'react';
+import AuthContext from '../../../context/auth-context';
 
 import classes from './Person.module.css';
 
@@ -11,6 +12,11 @@ const person = (props: {
 }) => {
   return (
     <div className={classes.Person}>
+      <AuthContext.Consumer>
+        {context =>
+          context.authenticated ? <p>Authenticated!</p> : <p>Please login</p>
+        }
+      </AuthContext.Consumer>
       <p onClick={props.click}>
         I'm {props.name} and I am {props.age} years old!
       </p>
